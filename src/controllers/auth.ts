@@ -32,11 +32,11 @@ export const signup = async (req: ExtendedRequest, res: Response) => {
         }
     }
     
-    const hasPassword = await hashSync(safeData.data.password);
+    //const hasPassword = await hashSync(safeData.data.password);
 
 
 
-    res.json(hasPassword); 
+    res.json({}); 
 }
 
 
