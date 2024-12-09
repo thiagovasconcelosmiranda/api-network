@@ -30,6 +30,5 @@ export const findUserByEmail = async (email: string) => {
        return user;
     }
     return null;
-    
 }
  
