@@ -2,6 +2,7 @@ import { Response } from "express";
 import { ExtendedRequest } from "../types/extended-request";
 import {signupSchema} from '../schemas/signup';
 import { findUserByEmail } from "../services/user";
+import { prisma } from "../utils/prisma";
 
 export const signup = async (req: ExtendedRequest, res: Response) => {
     const safeData = signupSchema.safeParse(req.body);
@@ -10,11 +11,11 @@ export const signup = async (req: ExtendedRequest, res: Response) => {
         res.json({ error: safeData.error.flatten().fieldErrors });
         return;
     }
+    const user = await prisma.user.findMany();
      
     //const hasEmail = await findUserByEmail(safeData.data.email);
     
-        
-    res.json(safeData.data.email);
+    res.json(user);
     
 }
 
