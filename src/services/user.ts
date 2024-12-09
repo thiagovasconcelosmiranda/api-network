@@ -1,6 +1,7 @@
 import { never } from "zod";
 import { prisma } from "../utils/prisma"
 import { getPublicUrl } from "../utils/url";
+import { Prisma } from "@prisma/client";
 
 export const findUserBySlug = async (slug: string) => {
     const user = await prisma.user.findMany({
@@ -30,4 +31,15 @@ export const findUserByEmail = async (email: string) => {
        return user;
     }
     return null;
+}
+
+export const createUser = async (data: Prisma.UserCreateInput) => {
+    const newUser = await prisma.user.create({data});
+
+    return {
+        ...newUser,
+        avatar: getPublicUrl(newUser.avatar, 'avatars', newUser.slug),
+        cover: getPublicUrl(newUser.cover, 'covers', newUser.slug)
+      }
+
 }

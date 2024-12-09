@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -e ts,json,mustache src/server.ts",
-    "vercel-build":"npx prisma migrate dev deploy"
+    "vercel-build": "npx prisma migrate dev deploy"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.10.1",
     "@types/slug": "^5.0.9",
+    "bcrypt-ts": "^5.0.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
