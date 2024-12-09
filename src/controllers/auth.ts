@@ -24,7 +24,6 @@ export const signup = async (req: ExtendedRequest, res: Response) => {
     res.json(safeData.data.name); 
 }
 
-
 export const signin = (req: ExtendedRequest, res: Response) => {
     res.json({email: req.body.email, password: req.body.password});
 }
