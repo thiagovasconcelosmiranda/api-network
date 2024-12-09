@@ -1,15 +1,24 @@
 import { Response } from "express";
 import { ExtendedRequest } from "../types/extended-request";
 import {signupSchema} from '../schemas/signup';
+import { findUserByEmail } from "../services/user";
 
-export const signup = (req: ExtendedRequest, res: Response) => {
+export const signup = async (req: ExtendedRequest, res: Response) => {
     const safeData = signupSchema.safeParse(req.body);
 
     if(!safeData.success){
         res.json({ error: safeData.error.flatten().fieldErrors });
         return;
     }
+
+    const hasEmail = await findUserByEmail(safeData.data.email);
+    if (hasEmail) {
+        res.json({ error: 'E-mail já existe' });
+        return;
+    }
+        
     res.json(safeData.data);
+    
 }
 
 
