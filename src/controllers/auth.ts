@@ -18,9 +18,7 @@ export const signup = async (req: ExtendedRequest, res: Response) => {
         res.json({ error: 'E-mail já existe' });
         return;
     }
-    let genSlug = true;
-    //let userSlug = slug(safeData.data.name);
-
+   
     res.json(safeData.data.name); 
 }
 
