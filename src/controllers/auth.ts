@@ -11,11 +11,13 @@ export const signup = async (req: ExtendedRequest, res: Response) => {
         res.json({ error: safeData.error.flatten().fieldErrors });
         return;
     }
-    const user = await prisma.user.findMany();
      
-    //const hasEmail = await findUserByEmail(safeData.data.email);
-    
-    res.json(user);
+    const hasEmail = await findUserByEmail(safeData.data.email);
+    if (hasEmail) {
+        res.json({ error: 'E-mail já existe' });
+        return;
+    }
+    res.json(safeData.data.name);
     
 }
 
