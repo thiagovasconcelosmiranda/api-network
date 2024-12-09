@@ -16,11 +16,7 @@ export const findUserBySlug = async (slug: string) => {
     });
 
     if(user){
-        return {
-            ...user,
-            avatar: getPublicUrl(user.avatar,'avatars', user.slug),
-            cover: getPublicUrl(user.cover,'covers', user.slug),
-          }
+        return user;
     }
     return null;
 }  
@@ -31,11 +27,8 @@ export const findUserByEmail = async (email: string) => {
     });
 
     if(!user){
-       return {
-        ...user,
-        avatar: getPublicUrl(user.avatar, 'avatars', user.slug ),
-        cover: getPublicUrl(user.cover, 'covers', user.slug)
-       }
+       return user;
     }
+    return null;
 }
  

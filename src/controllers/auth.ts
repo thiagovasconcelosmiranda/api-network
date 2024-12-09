@@ -10,15 +10,11 @@ export const signup = async (req: ExtendedRequest, res: Response) => {
         res.json({ error: safeData.error.flatten().fieldErrors });
         return;
     }
-     /*
+     
     const hasEmail = await findUserByEmail(safeData.data.email);
-    if (hasEmail) {
-        res.json({ error: 'E-mail já existe' });
-        return;
-    }
-        */
+    
         
-    res.json(safeData.data);
+    res.json(hasEmail);
     
 }
 
