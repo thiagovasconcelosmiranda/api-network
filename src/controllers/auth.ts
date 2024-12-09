@@ -1,8 +1,9 @@
 import { Response } from "express";
 import { ExtendedRequest } from "../types/extended-request";
 import {signupSchema} from '../schemas/signup';
-import { findUserByEmail } from "../services/user";
+import { findUserByEmail, findUserBySlug } from "../services/user";
 import { prisma } from "../utils/prisma";
+import slug from 'slug';
 
 export const signup = async (req: ExtendedRequest, res: Response) => {
     const safeData = signupSchema.safeParse(req.body);
@@ -16,6 +17,18 @@ export const signup = async (req: ExtendedRequest, res: Response) => {
     if (hasEmail) {
         res.json({ error: 'E-mail já existe' });
         return;
+    }
+    let genSlug = true;
+    let userSlug = slug(safeData.data.name);
+
+    while (genSlug) {
+        const hasSlug = await findUserBySlug(userSlug);
+        if (hasSlug) {
+            let slugSuffix = Math.floor(Math.random() * 99999).toString();
+            userSlug = slug(safeData.data.name + slugSuffix);
+        } else {
+            genSlug = false;
+        }
     }
     res.json(safeData.data.name); 
 }
