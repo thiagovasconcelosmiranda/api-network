@@ -19,7 +19,7 @@ export const signup = async (req: ExtendedRequest, res: Response) => {
         return;
     }
     let genSlug = true;
-    let userSlug = slug(safeData.data.name);
+    //let userSlug = slug(safeData.data.name);
 
     res.json(safeData.data.name); 
 }
