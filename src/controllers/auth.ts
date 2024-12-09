@@ -11,10 +11,10 @@ export const signup = async (req: ExtendedRequest, res: Response) => {
         return;
     }
      
-    const hasEmail = await findUserByEmail(safeData.data.email);
+    //const hasEmail = await findUserByEmail(safeData.data.email);
     
         
-    res.json(hasEmail);
+    res.json(safeData.data.email);
     
 }
 
