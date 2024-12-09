@@ -21,15 +21,6 @@ export const signup = async (req: ExtendedRequest, res: Response) => {
     let genSlug = true;
     let userSlug = slug(safeData.data.name);
 
-    while (genSlug) {
-        const hasSlug = await findUserBySlug(userSlug);
-        if (hasSlug) {
-            let slugSuffix = Math.floor(Math.random() * 99999).toString();
-            userSlug = slug(safeData.data.name + slugSuffix);
-        } else {
-            genSlug = false;
-        }
-    }
     res.json(safeData.data.name); 
 }
 
